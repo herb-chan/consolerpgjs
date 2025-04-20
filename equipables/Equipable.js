@@ -1,5 +1,7 @@
 import EquipableSlots from "./EquipableSlots.js";
 import Item from "../items/Item.js";
+import { ItemCategories } from "../items/ItemCategories.js";
+import { ItemRarities } from "../items/ItemRarities.js";
 
 export default class Equipable extends Item {
   constructor({
@@ -7,11 +9,11 @@ export default class Equipable extends Item {
     quantity = 1,
     description = "",
     rarity = ItemRarities.COMMON,
-    type = ItemTypes.MISCELLANEOUS,
+    category = ItemCategories.MISCELLANEOUS,
     stats = {},
     equipSlot = null,
   }) {
-    super({ name, quantity, description, rarity, type, stats });
+    super({ name, quantity, description, rarity, category, stats });
 
     if (!Object.values(EquipableSlots).includes(equipSlot)) {
       throw new ItemError(`Invalid equipable slot: "${equipSlot}"`, {

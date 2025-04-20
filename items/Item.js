@@ -2,7 +2,7 @@ import chalk from "chalk";
 
 import ColorUtils from "../utils/ColorUtils.js";
 
-import { ItemTypes, ItemTypesDisplay } from "./ItemTypes.js";
+import { ItemCategories, ItemCategoriesDisplay } from "./ItemCategories.js";
 import { ItemRarities, ItemRaritiesDisplay } from "./ItemRarities.js";
 import ItemError from "./ItemError.js";
 import ItemIconManager from "../icons/ItemIconManager.js";
@@ -13,13 +13,13 @@ export default class Item {
     quantity = 1,
     description = "",
     rarity = ItemRarities.COMMON,
-    type = ItemTypes.MISCELLANEOUS,
+    category = ItemCategories.MISCELLANEOUS,
     stats = {},
   }) {
-    if (!Object.values(ItemTypes).includes(type)) {
-      throw new ItemError(`Invalid item type: "${type}"`, {
-        invalidValue: type,
-        expectedValues: Object.values(ItemTypes),
+    if (!Object.values(ItemCategories).includes(category)) {
+      throw new ItemError(`Invalid item category: "${category}"`, {
+        invalidValue: category,
+        expectedValues: Object.values(ItemCategories),
       });
     }
 
@@ -34,7 +34,7 @@ export default class Item {
     this.quantity = quantity;
     this.description = description;
     this.rarity = rarity;
-    this.type = type;
+    this.category = category;
     this.stats = stats;
   }
 
@@ -43,7 +43,7 @@ export default class Item {
   }
 
   getDisplayIcon() {
-    const icon = ItemIconManager.getIcon(this.type);
+    const icon = ItemIconManager.getIcon(this.category);
     return ColorUtils.colorRarity(this.rarity, icon);
   }
 
@@ -55,8 +55,8 @@ export default class Item {
     return ItemRaritiesDisplay[this.rarity];
   }
 
-  getTypeDisplay() {
-    return ItemTypesDisplay[this.type];
+  getCategoryDisplay() {
+    return ItemCategoriesDisplay[this.category];
   }
 
   getStatsAsString() {

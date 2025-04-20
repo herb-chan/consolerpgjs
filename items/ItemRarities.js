@@ -1,39 +1,21 @@
-/**
- * @enum {string}
- * @readonly
- * @description
- * Enum-like object representing different item rarities in the game.
- */
-export const ItemRarities = Object.freeze({
-  /** Common item — basic and frequently found. */
-  COMMON: "COMMON",
+const itemRarityKeys = [
+  "COMMON",
+  "UNCOMMON",
+  "RARE",
+  "EPIC",
+  "LEGENDARY",
+  "RELIC",
+];
 
-  /** Uncommon item — slightly rarer and usually better than common. */
-  UNCOMMON: "UNCOMMON",
+export const ItemRarities = Object.freeze(
+  Object.fromEntries(itemRarityKeys.map((key) => [key, key]))
+);
 
-  /** Rare item — harder to find and offers better stats. */
-  RARE: "RARE",
-
-  /** Epic item — very rare and powerful, often with special effects. */
-  EPIC: "EPIC",
-
-  /** Legendary item — extremely rare and very powerful, usually end-game. */
-  LEGENDARY: "LEGENDARY",
-});
-
-export const ItemRaritiesDisplay = Object.freeze({
-  /** Common item — basic and frequently found. */
-  COMMON: "Common",
-
-  /** Uncommon item — slightly rarer and usually better than common. */
-  UNCOMMON: "Uncommon",
-
-  /** Rare item — harder to find and offers better stats. */
-  RARE: "Rare",
-
-  /** Epic item — very rare and powerful, often with special effects. */
-  EPIC: "Epic",
-
-  /** Legendary item — extremely rare and very powerful, usually end-game. */
-  LEGENDARY: "Legendary",
-});
+export const ItemRaritiesDisplay = Object.freeze(
+  Object.fromEntries(
+    itemRarityKeys.map((key) => [
+      key,
+      key.charAt(0) + key.slice(1).toLowerCase(),
+    ])
+  )
+);

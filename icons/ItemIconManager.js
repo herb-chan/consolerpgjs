@@ -15,8 +15,8 @@ class ItemIconManager {
     return currentMode;
   }
 
-  static getIcon(type) {
-    const icons = ICON_MAP[type];
+  static getIcon(category) {
+    const icons = ICON_MAP[category];
     if (!icons) return "?";
     return icons[currentMode] || "?";
   }

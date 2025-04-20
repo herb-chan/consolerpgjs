@@ -4,7 +4,7 @@ import ColorUtils from "./utils/ColorUtils.js";
 
 import Equipable from "./equipables/Equipable.js";
 import EquipableSlots from "./equipables/EquipableSlots.js";
-import { ItemTypes } from "./items/ItemTypes.js";
+import { ItemCategories } from "./items/ItemCategories.js";
 import { ItemRarities } from "./items/ItemRarities.js";
 
 const WIDTH = 60;
@@ -253,7 +253,7 @@ inventory[0] = new Equipable({
   quantity: 1,
   description: "Protects your head. Also your chance of dating.",
   rarity: ItemRarities.UNCOMMON,
-  type: ItemTypes.ARMOR,
+  category: ItemCategories.EQUIPABLE,
   stats: { defense: 8 },
   equipSlot: EquipableSlots.HELMET,
 });
@@ -263,7 +263,7 @@ inventory[1] = new Equipable({
   quantity: 1,
   description: "Technically a weapon. Spiritually, a mistake.",
   rarity: ItemRarities.LEGENDARY,
-  type: ItemTypes.WEAPON,
+  category: ItemCategories.EQUIPABLE,
   stats: { attack: 15, defense: -2 },
   equipSlot: EquipableSlots.WEAPON,
 });
@@ -435,7 +435,7 @@ function renderDungeon() {
           line += `   ${statsText}`;
         } else {
           const itemRarity = selectedItem.rarity.toUpperCase();
-          const rarityText = `${selectedItem.getRarityDisplay()} ${selectedItem.getTypeDisplay()}`;
+          const rarityText = `${selectedItem.getRarityDisplay()} ${selectedItem.getCategoryDisplay()}`;
           line += `   ${ColorUtils.colorRarity(itemRarity, rarityText)}`;
         }
       }
@@ -444,7 +444,7 @@ function renderDungeon() {
         const statsText = selectedItem.getStatsAsString?.();
         if (statsText) {
           const itemRarity = selectedItem.rarity.toUpperCase();
-          const rarityText = `${selectedItem.getRarityDisplay()} ${selectedItem.getTypeDisplay()}`;
+          const rarityText = `${selectedItem.getRarityDisplay()} ${selectedItem.getCategoryDisplay()}`;
           line += `   ${ColorUtils.colorRarity(itemRarity, rarityText)}`;
         }
       }

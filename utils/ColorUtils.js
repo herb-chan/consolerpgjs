@@ -7,6 +7,7 @@ export default class ColorUtils {
     RARE: chalk.blue,
     EPIC: chalk.magenta,
     LEGENDARY: chalk.yellow,
+    RELIC: chalk.magentaBright,
   };
 
   static statColors = {
