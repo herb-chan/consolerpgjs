@@ -6,6 +6,7 @@ import Equipable from "./equipables/Equipable.js";
 import EquipableSlots from "./equipables/EquipableSlots.js";
 import { ItemCategories } from "./items/ItemCategories.js";
 import { ItemRarities } from "./items/ItemRarities.js";
+import { ItemTypes } from "./items/ItemType.js";
 
 const WIDTH = 60;
 const HEIGHT = 30;
@@ -255,6 +256,7 @@ inventory[0] = new Equipable({
   rarity: ItemRarities.UNCOMMON,
   category: ItemCategories.EQUIPABLE,
   stats: { defense: 8 },
+  type: ItemTypes.HELMET,
   equipSlot: EquipableSlots.HELMET,
 });
 
@@ -265,6 +267,7 @@ inventory[1] = new Equipable({
   rarity: ItemRarities.LEGENDARY,
   category: ItemCategories.EQUIPABLE,
   stats: { attack: 15, defense: -2 },
+  type: ItemTypes.SWORD,
   equipSlot: EquipableSlots.WEAPON,
 });
 

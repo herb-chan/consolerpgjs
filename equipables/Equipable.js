@@ -10,10 +10,11 @@ export default class Equipable extends Item {
     description = "",
     rarity = ItemRarities.COMMON,
     category = ItemCategories.MISCELLANEOUS,
+    type,
     stats = {},
     equipSlot = null,
   }) {
-    super({ name, quantity, description, rarity, category, stats });
+    super({ name, quantity, description, rarity, category, type, stats });
 
     if (!Object.values(EquipableSlots).includes(equipSlot)) {
       throw new ItemError(`Invalid equipable slot: "${equipSlot}"`, {

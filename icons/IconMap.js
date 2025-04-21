@@ -1,37 +1,97 @@
 export default {
-  WEAPON: {
+  HELMET: {
+    emoji: "🪖",
+    font: "󰉟",
+    ascii: "^",
+  },
+  CHESTPLATE: {
+    emoji: "🥋",
+    font: "",
+    ascii: "#",
+  },
+  LEGGINGS: {
+    emoji: "👖",
+    font: "",
+    ascii: "/\\",
+  },
+  BOOTS: {
+    emoji: "🥾",
+    font: "",
+    ascii: "__",
+  },
+  SWORD: {
     emoji: "🗡️",
     font: "󰓥",
     ascii: "|>",
   },
-  SECONDARY: {
+  DICE: {
+    emoji: "🎲",
+    font: "󱅕",
+    ascii: "[*]",
+  },
+  SHIELD: {
+    emoji: "🛡️",
+    font: "󰒘",
+    ascii: "[O]",
+  },
+  TOME: {
     emoji: "📖",
     font: "󰗚",
     ascii: "\\/",
+  },
+  SCROLL: {
+    emoji: "📜",
+    font: "󰈙",
+    ascii: "~=",
+  },
+  SHARD: {
+    emoji: "🧿",
+    font: "󱥹",
+    ascii: "<>",
+  },
+  CARD: {
+    emoji: "🃏",
+    font: "󱢡",
+    ascii: "[!]",
+  },
+  KEY: {
+    emoji: "🗝️",
+    font: "󰌆",
+    ascii: "|--",
+  },
+  LOCKPICK: {
+    emoji: "🧷",
+    font: "󱙱",
+    ascii: "/=",
+  },
+  LANTERN: {
+    emoji: "🏮",
+    font: "󱘆",
+    ascii: "(*)",
   },
   TALISMAN: {
     emoji: "🔮",
     font: "󰠖",
     ascii: "*_",
   },
-  CONSUMABLE: {
+  POTION: {
     emoji: "🧪",
-    font: "󰼾",
-    ascii: "*",
+    font: "󰂓",
+    ascii: "!",
   },
-  QUEST: {
-    emoji: "📜",
-    font: "󰛓",
-    ascii: "!!",
+  SACK: {
+    emoji: "🎒",
+    font: "󰴮",
+    ascii: "{}",
   },
-  MATERIAL: {
-    emoji: "🧵",
-    font: "󰓹",
-    ascii: "=",
+  GOLD: {
+    emoji: "🪙",
+    font: "",
+    ascii: "$",
   },
-  MISCELLANEOUS: {
-    emoji: "📦",
-    font: "󱉟",
-    ascii: "?",
+  RUNE: {
+    emoji: "ᚠ",
+    font: "󱐋",
+    ascii: "ʘ",
   },
 };
