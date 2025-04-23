@@ -26,7 +26,15 @@ export default class Equipable extends Item {
     this.equipSlot = equipSlot;
   }
 
-  canEquip(slot) {
-    return this.equipSlot === slot;
+  applyStatistics(entity) {
+    for (const [statistic, value] of Object.entries(this.stats)) {
+      entity.stats[statistic] += value;
+    }
   }
+
+  onEquip(entity) {}
+  onUnequip(entity) {}
+  onDamage(entity) {}
+  onDeath(entity) {}
+  onAttack(target) {}
 }
