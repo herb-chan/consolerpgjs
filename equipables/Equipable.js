@@ -1,5 +1,6 @@
 import EquipableSlots from "./EquipableSlots.js";
 import Item from "../items/Item.js";
+import ItemError from "../items/ItemError.js";
 import { ItemCategories } from "../items/ItemCategories.js";
 import { ItemRarities } from "../items/ItemRarities.js";
 
@@ -14,7 +15,7 @@ export default class Equipable extends Item {
     stats = {},
     equipSlot = null,
   }) {
-    super({ name, quantity, description, rarity, category, type, stats });
+    super({name, quantity, description, rarity, category, type, stats});
 
     if (!Object.values(EquipableSlots).includes(equipSlot)) {
       throw new ItemError(`Invalid equipable slot: "${equipSlot}"`, {
@@ -29,12 +30,17 @@ export default class Equipable extends Item {
   applyStatistics(entity) {
     for (const [statistic, value] of Object.entries(this.stats)) {
       entity.stats[statistic] += value;
+      console.log(`${this.name} applied ${value} to ${statistic}`);
     }
   }
 
   onEquip(entity) {}
+
   onUnequip(entity) {}
+
   onDamage(entity) {}
+
   onDeath(entity) {}
+
   onAttack(target) {}
 }

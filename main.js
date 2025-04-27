@@ -45,8 +45,8 @@ const PLAYER = {
   color: DEBUG_MODE ? chalk.greenBright : chalk.greenBright,
 };
 
-const dungeon = Array.from({ length: HEIGHT }, () =>
-  Array.from({ length: WIDTH }, () => ({ ...WALL }))
+const dungeon = Array.from({length: HEIGHT}, () =>
+  Array.from({length: WIDTH}, () => ({...WALL})),
 );
 
 const rooms = [];
@@ -60,7 +60,7 @@ function createRoom(x, y, w, h) {
   for (let i = y; i < y + h; i++) {
     for (let j = x; j < x + w; j++) {
       if (i > 0 && i < HEIGHT && j > 0 && j < WIDTH) {
-        dungeon[i][j] = { ...FLOOR };
+        dungeon[i][j] = {...FLOOR};
       }
     }
   }
@@ -83,22 +83,25 @@ function getConnectionPoints(room, toward) {
 
   if (Math.abs(dx) > Math.abs(dy)) {
     if (dx > 0) {
-      entry = { x: room.x + room.w, y: cy };
-      start = { x: entry.x + 1, y: entry.y };
+      entry = {x: room.x + room.w, y: cy};
+      start = {x: entry.x + 1, y: entry.y};
       direction = "right";
-    } else {
-      entry = { x: room.x - 1, y: cy };
-      start = { x: entry.x - 1, y: entry.y };
+    }
+    else {
+      entry = {x: room.x - 1, y: cy};
+      start = {x: entry.x - 1, y: entry.y};
       direction = "left";
     }
-  } else {
+  }
+  else {
     if (dy > 0) {
-      entry = { x: cx, y: room.y + room.h };
-      start = { x: entry.x, y: entry.y + 1 };
+      entry = {x: cx, y: room.y + room.h};
+      start = {x: entry.x, y: entry.y + 1};
       direction = "down";
-    } else {
-      entry = { x: cx, y: room.y - 1 };
-      start = { x: entry.x, y: entry.y - 1 };
+    }
+    else {
+      entry = {x: cx, y: room.y - 1};
+      start = {x: entry.x, y: entry.y - 1};
       direction = "up";
     }
   }
@@ -108,7 +111,7 @@ function getConnectionPoints(room, toward) {
   start.x = Math.max(1, Math.min(WIDTH - 2, start.x));
   start.y = Math.max(1, Math.min(HEIGHT - 2, start.y));
 
-  dungeon[start.y][start.x] = { ...TUNNEL };
+  dungeon[start.y][start.x] = {...TUNNEL};
   pokeIntoRoom(entry, direction);
 
   return start;
@@ -118,32 +121,27 @@ function pokeIntoRoom(entry, direction) {
   let poke;
   switch (direction) {
     case "right":
-      poke = { x: entry.x - 1, y: entry.y };
+      poke = {x: entry.x - 1, y: entry.y};
       break;
     case "left":
-      poke = { x: entry.x + 1, y: entry.y };
+      poke = {x: entry.x + 1, y: entry.y};
       break;
     case "down":
-      poke = { x: entry.x, y: entry.y - 1 };
+      poke = {x: entry.x, y: entry.y - 1};
       break;
     case "up":
-      poke = { x: entry.x, y: entry.y + 1 };
+      poke = {x: entry.x, y: entry.y + 1};
       break;
   }
   if (poke && dungeon[poke.y][poke.x]?.isWalkable) {
-    dungeon[entry.y][entry.x] = { ...TUNNEL };
+    dungeon[entry.y][entry.x] = {...TUNNEL};
   }
-}
-
-function carveLine(p1, p2) {
-  if (p1.x === p2.x) createVTunnel(p1.y, p2.y, p1.x);
-  else if (p1.y === p2.y) createHTunnel(p1.x, p2.x, p1.y);
 }
 
 function createHTunnel(x1, x2, y) {
   for (let x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
     if (dungeon[y]?.[x] && !dungeon[y][x].isWalkable) {
-      dungeon[y][x] = { ...TUNNEL };
+      dungeon[y][x] = {...TUNNEL};
     }
   }
 }
@@ -151,7 +149,7 @@ function createHTunnel(x1, x2, y) {
 function createVTunnel(y1, y2, x) {
   for (let y = Math.min(y1, y2); y <= Math.max(y1, y2); y++) {
     if (dungeon[y]?.[x] && !dungeon[y][x].isWalkable) {
-      dungeon[y][x] = { ...TUNNEL };
+      dungeon[y][x] = {...TUNNEL};
     }
   }
 }
@@ -160,7 +158,8 @@ function createPath(from, to) {
   if (Math.random() < 0.5) {
     createHTunnel(from.x, to.x, from.y);
     createVTunnel(from.y, to.y, to.x);
-  } else {
+  }
+  else {
     createVTunnel(from.y, to.y, from.x);
     createHTunnel(from.x, to.x, to.y);
   }
@@ -170,11 +169,13 @@ function createPath(from, to) {
 for (let i = 0; i < NUM_ROOMS; i++) {
   let w = random(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
   let h = random(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
-  if (Math.random() < 0.1) w = h = random(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
+  if (Math.random() < 0.1) {
+    w = h = random(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
+  }
 
   const x = random(1, WIDTH - w - 2);
   const y = random(1, HEIGHT - h - 2);
-  const newRoom = { x, y, w, h };
+  const newRoom = {x, y, w, h};
 
   let failed = false;
   for (const other of rooms) {
@@ -227,7 +228,7 @@ while (unconnected.length > 0) {
 // Place player
 const playerRoom = validRooms[random(0, validRooms.length - 1)];
 let playerPos = center(playerRoom);
-dungeon[playerPos.y][playerPos.x] = { ...PLAYER };
+dungeon[playerPos.y][playerPos.x] = {...PLAYER};
 
 // Player state
 const playerStats = {
@@ -255,7 +256,7 @@ inventory[0] = new Equipable({
   description: "Protects your head. Also your chance of dating.",
   rarity: ItemRarities.UNCOMMON,
   category: ItemCategories.EQUIPABLE,
-  stats: { defense: 8 },
+  stats: {defense: 8},
   type: ItemTypes.HELMET,
   equipSlot: EquipableSlots.HELMET,
 });
@@ -266,7 +267,7 @@ inventory[1] = new Equipable({
   description: "Technically a weapon. Spiritually, a mistake.",
   rarity: ItemRarities.LEGENDARY,
   category: ItemCategories.EQUIPABLE,
-  stats: { attack: 15, defense: -2 },
+  stats: {attack: 15, defense: -2},
   type: ItemTypes.SWORD,
   equipSlot: EquipableSlots.WEAPON,
 });
@@ -282,7 +283,7 @@ let equipmentIndex = 0;
 const equipmentSlots = Object.keys(equipment);
 
 function renderDungeon() {
-  console.clear();
+  // console.clear();
 
   for (let y = 0; y < HEIGHT; y++) {
     let line = "";
@@ -296,25 +297,25 @@ function renderDungeon() {
     if (y === 2) {
       line += `   Health: ${ColorUtils.colorStat(
         "health",
-        playerStats.health
+        playerStats.health,
       )}`;
     }
     if (y === 3) {
       line += `   Attack: ${ColorUtils.colorStat(
         "attack",
-        playerStats.attack
+        playerStats.attack,
       )}`;
     }
     if (y === 4) {
       line += `   Defense: ${ColorUtils.colorStat(
         "defense",
-        playerStats.defense
+        playerStats.defense,
       )}`;
     }
     if (y === 5) {
       line += `   Experience: ${ColorUtils.colorStat(
         "experience",
-        playerStats.experience
+        playerStats.experience,
       )}`;
     }
     if (y === 6) {
@@ -400,19 +401,19 @@ function renderDungeon() {
       const row = y - 18;
       const slots = inventory.slice(
         row * inventoryCols,
-        row * inventoryCols + inventoryCols
+        row * inventoryCols + inventoryCols,
       );
 
       const invLine = slots
-        .map((item, i) => {
-          const idx = row * inventoryCols + i;
-          let label = item ? item.getDisplayIcon() : " ";
-          if (idx === inventoryIndex && inventoryMode) {
-            label = chalk.underline(label);
-          }
-          return `[${label}]`;
-        })
-        .join(" ");
+      .map((item, i) => {
+        const idx = row * inventoryCols + i;
+        let label = item ? item.getDisplayIcon() : " ";
+        if (idx === inventoryIndex && inventoryMode) {
+          label = chalk.underline(label);
+        }
+        return `[${label}]`;
+      })
+      .join(" ");
 
       line += `   ${invLine}`;
     }
@@ -420,8 +421,8 @@ function renderDungeon() {
     const selectedItem = inventoryMode
       ? inventory[inventoryIndex]
       : equipmentMode
-      ? equipment[equipmentSlots[equipmentIndex]]
-      : null;
+        ? equipment[equipmentSlots[equipmentIndex]]
+        : null;
 
     if (selectedItem) {
       if (y === 23) {
@@ -436,7 +437,8 @@ function renderDungeon() {
         const statsText = selectedItem.getStatsAsString?.();
         if (statsText) {
           line += `   ${statsText}`;
-        } else {
+        }
+        else {
           const itemRarity = selectedItem.rarity.toUpperCase();
           const rarityText = `${selectedItem.getRarityDisplay()} ${selectedItem.getCategoryDisplay()}`;
           line += `   ${ColorUtils.colorRarity(itemRarity, rarityText)}`;
@@ -457,7 +459,7 @@ function renderDungeon() {
   }
 }
 
-let previousTile = { ...FLOOR };
+let previousTile = {...FLOOR};
 
 function movePlayer(dx, dy) {
   const newX = playerPos.x + dx;
@@ -465,11 +467,11 @@ function movePlayer(dx, dy) {
   const destination = dungeon[newY]?.[newX];
 
   if (destination && destination.isWalkable) {
-    dungeon[playerPos.y][playerPos.x] = { ...previousTile };
-    previousTile = { ...destination };
+    dungeon[playerPos.y][playerPos.x] = {...previousTile};
+    previousTile = {...destination};
     playerPos.x = newX;
     playerPos.y = newY;
-    dungeon[playerPos.y][playerPos.x] = { ...PLAYER };
+    dungeon[playerPos.y][playerPos.x] = {...PLAYER};
     renderDungeon();
   }
 }
@@ -487,9 +489,12 @@ function moveInventory(dx, dy) {
 
 function moveEquipment(dy) {
   equipmentIndex += dy;
-  if (equipmentIndex < 0) equipmentIndex = 0;
-  if (equipmentIndex >= equipmentSlots.length)
+  if (equipmentIndex < 0) {
+    equipmentIndex = 0;
+  }
+  if (equipmentIndex >= equipmentSlots.length) {
     equipmentIndex = equipmentSlots.length - 1;
+  }
   renderDungeon();
 }
 
@@ -498,7 +503,9 @@ process.stdin.resume();
 process.stdin.setEncoding("utf8");
 
 process.stdin.on("data", (key) => {
-  if (key === "\u0003") process.exit(); // Ctrl+C
+  if (key === "\u0003") {
+    process.exit();
+  } // Ctrl+C
 
   if (key === "i" || key === "I" || key === "\u001b") {
     inventoryIndex = 0;
@@ -517,10 +524,14 @@ process.stdin.on("data", (key) => {
   }
 
   if (key === "Backspace" || key === "\u007F" || key === "\u0008") {
-    if (!inventoryMode) return;
+    if (!inventoryMode) {
+      return;
+    }
 
     const item = inventory[inventoryIndex];
-    if (!item) return;
+    if (!item) {
+      return;
+    }
 
     inventory[inventoryIndex] = null;
     renderDungeon();
@@ -529,10 +540,14 @@ process.stdin.on("data", (key) => {
   }
 
   if (key === "Enter" || key === "\r") {
-    if (!inventoryMode) return;
+    if (!inventoryMode) {
+      return;
+    }
 
     const item = inventory[inventoryIndex];
-    if (!item) return;
+    if (!item) {
+      return;
+    }
 
     if (item instanceof Equipable) {
       const slot = item.equipSlot;
@@ -555,9 +570,15 @@ process.stdin.on("data", (key) => {
   }[key];
 
   if (dir) {
-    if (inventoryMode) moveInventory(...dir);
-    else if (equipmentMode) moveEquipment(dir[1]); // only up/down needed
-    else movePlayer(...dir);
+    if (inventoryMode) {
+      moveInventory(...dir);
+    }
+    else if (equipmentMode) {
+      moveEquipment(dir[1]);
+    }// only up/down needed
+    else {
+      movePlayer(...dir);
+    }
   }
 });
 

@@ -1,7 +1,7 @@
-export default class ItemError extends Error {
+class InventoryError extends Error {
   constructor(message, {invalidValue = null, expectedValues = []} = {}) {
     super(message);
-    this.name = "ItemError";
+    this.name = "InventoryError";
     this.invalidValue = invalidValue;
     this.expectedValues = expectedValues;
     this.hint = expectedValues.length
@@ -9,7 +9,7 @@ export default class ItemError extends Error {
       : null;
 
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, ItemError);
+      Error.captureStackTrace(this, InventoryError);
     }
   }
 
@@ -19,3 +19,5 @@ export default class ItemError extends Error {
     }`;
   }
 }
+
+export default InventoryError;

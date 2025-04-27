@@ -1,1 +1,8 @@
 node_modules/
+modules.xml
+vcs.xml
+project.xml
+prettier.xml
+jsLibraryMappings.xml
+consolerpgjs.iml
+codeStyleConfig.xml

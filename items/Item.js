@@ -71,13 +71,15 @@ export default class Item {
 
   getStatsAsString() {
     const entries = Object.entries(this.stats);
-    if (entries.length === 0) return null;
+    if (entries.length === 0) {
+      return null;
+    }
 
     return entries
-      .map(
-        ([key, value]) =>
-          `${value > 0 ? "+" : ""}${value} ${ColorUtils.colorStat(key, key)}`
-      )
-      .join(", ");
+    .map(
+      ([key, value]) =>
+        `${value > 0 ? "+" : ""}${value} ${ColorUtils.colorStat(key, key)}`,
+    )
+    .join(", ");
   }
 }
